@@ -7,10 +7,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Http;
+using System.Web.Http;  
 
 namespace ArtiConnect.Api.Controllers
 {
+    [ApiLogger]
     [RoutePrefix("api/remoteServer")]
     public class RemoteServerController : ApiController
     {
@@ -75,17 +76,11 @@ namespace ArtiConnect.Api.Controllers
                         // Sorguyu çalıştır
                         int affectedRows = command.ExecuteNonQuery();
 
-                        // Log kaydı ekle
-                        LogApiEvent("SubeSatis Eklendi", $"Şube Kodu: {modal.SubeKodu}, Stok Kodu: {modal.StokKodu}, Miktar: {modal.Miktar}");
-
                         return Ok(new { Success = true, AffectedRows = affectedRows, Message = "Şube satış verisi başarıyla eklendi." });
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Hata logla
-                    LogApiEvent("SubeSatis Ekleme Hatası", ex.Message);
-
                     return BadRequest($"Şube satış verisi eklenirken hata oluştu: {ex.Message}");
                 }
             }
@@ -167,9 +162,6 @@ namespace ArtiConnect.Api.Controllers
                             // Transaction'ı commit et
                             transaction.Commit();
 
-                            // Log kaydı ekle
-                            LogApiEvent("Toplu SubeSatis Eklendi", $"{modalList.Count} adet şube satış verisi eklendi.");
-
                             return Ok(new { Success = true, AffectedRows = totalAffectedRows, Message = $"{modalList.Count} adet şube satış verisi başarıyla eklendi." });
                         }
                         catch (Exception ex)
@@ -177,18 +169,12 @@ namespace ArtiConnect.Api.Controllers
                             // Hata durumunda transaction'ı geri al
                             transaction.Rollback();
 
-                            // Hata logla
-                            LogApiEvent("Toplu SubeSatis Ekleme Hatası", ex.Message);
-
                             return BadRequest($"Şube satış verileri eklenirken hata oluştu: {ex.Message}");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Bağlantı hatası
-                    LogApiEvent("Veritabanı Bağlantı Hatası", ex.Message);
-
                     return BadRequest($"Veritabanı bağlantısı sırasında hata oluştu: {ex.Message}");
                 }
             }
@@ -238,17 +224,11 @@ namespace ArtiConnect.Api.Controllers
                         // Sorguyu çalıştır
                         int affectedRows = command.ExecuteNonQuery();
 
-                        // Log kaydı ekle
-                        LogApiEvent("SubeOdeme Eklendi", $"Şube Kodu: {modal.SubeKodu}, Fiş ID: {modal.FisId}, Ödeme Yöntemi: {modal.OdemeYontemiAdi}, Miktar: {modal.Miktar}");
-
                         return Ok(new { Success = true, AffectedRows = affectedRows, Message = "Şube ödeme verisi başarıyla eklendi." });
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Hata logla
-                    LogApiEvent("SubeOdeme Ekleme Hatası", ex.Message);
-
                     return BadRequest($"Şube ödeme verisi eklenirken hata oluştu: {ex.Message}");
                 }
             }
@@ -316,9 +296,6 @@ namespace ArtiConnect.Api.Controllers
                             // Transaction'ı commit et
                             transaction.Commit();
 
-                            // Log kaydı ekle
-                            LogApiEvent("Toplu SubeOdeme Eklendi", $"{modalList.Count} adet şube ödeme verisi eklendi.");
-
                             return Ok(new { Success = true, AffectedRows = totalAffectedRows, Message = $"{modalList.Count} adet şube ödeme verisi başarıyla eklendi." });
                         }
                         catch (Exception ex)
@@ -326,46 +303,14 @@ namespace ArtiConnect.Api.Controllers
                             // Hata durumunda transaction'ı geri al
                             transaction.Rollback();
 
-                            // Hata logla
-                            LogApiEvent("Toplu SubeOdeme Ekleme Hatası", ex.Message);
-
                             return BadRequest($"Şube ödeme verileri eklenirken hata oluştu: {ex.Message}");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Bağlantı hatası
-                    LogApiEvent("Veritabanı Bağlantı Hatası", ex.Message);
-
                     return BadRequest($"Veritabanı bağlantısı sırasında hata oluştu: {ex.Message}");
                 }
-            }
-        }
-
-        /// <summary>
-        /// API olaylarını loglar
-        /// </summary>
-        private void LogApiEvent(string eventName, string description)
-        {
-            try
-            {
-                // ApiLog sınıfınıza göre düzenleyin
-                db.ApiLogs.Add(new Entities.ApiLog
-                {
-                    Timestamp = DateTime.Now,
-                    Endpoint = "api/remoteServer",
-                    Method = eventName,
-                    RequestData = description,
-                    ResponseData = "",
-                    StatusCode = 200
-                });
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                // Log hatalarını sessizce kaydet
-                System.Diagnostics.Debug.WriteLine($"Log kaydedilirken hata: {ex.Message}");
             }
         }
     }

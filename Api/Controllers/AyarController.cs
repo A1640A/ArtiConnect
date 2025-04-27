@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace ArtiConnect.Api.Controllers
 {
+    [ApiLogger]
     [RoutePrefix("api/ayar")]
     public class AyarsController : ApiController
     {

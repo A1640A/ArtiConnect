@@ -48,9 +48,13 @@
             this.tbSunucu = new System.Windows.Forms.TextBox();
             this.btKaydet = new System.Windows.Forms.Button();
             this.chkStartWithWindows = new System.Windows.Forms.CheckBox();
+            this.dgvApiLogs = new System.Windows.Forms.DataGridView();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.txtSearchLogs = new System.Windows.Forms.TextBox();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvApiLogs)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPort
@@ -103,9 +107,9 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 282);
+            this.statusStrip.Location = new System.Drawing.Point(0, 287);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(385, 22);
+            this.statusStrip.Size = new System.Drawing.Size(798, 22);
             this.statusStrip.TabIndex = 5;
             this.statusStrip.Text = "statusStrip1";
             // 
@@ -227,17 +231,46 @@
             this.chkStartWithWindows.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkStartWithWindows.Location = new System.Drawing.Point(216, 103);
             this.chkStartWithWindows.Name = "chkStartWithWindows";
-            this.chkStartWithWindows.Size = new System.Drawing.Size(91, 17);
+            this.chkStartWithWindows.Size = new System.Drawing.Size(114, 17);
             this.chkStartWithWindows.TabIndex = 5;
-            this.chkStartWithWindows.Text = "Açılışta çalıştır";
+            this.chkStartWithWindows.Text = "Windows ile başlat";
             this.chkStartWithWindows.UseVisualStyleBackColor = true;
             this.chkStartWithWindows.CheckedChanged += new System.EventHandler(this.chkStartWithWindows_CheckedChanged);
+            // 
+            // dgvApiLogs
+            // 
+            this.dgvApiLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvApiLogs.Location = new System.Drawing.Point(378, 38);
+            this.dgvApiLogs.Name = "dgvApiLogs";
+            this.dgvApiLogs.Size = new System.Drawing.Size(408, 217);
+            this.dgvApiLogs.TabIndex = 8;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(711, 261);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 9;
+            this.btnClear.Text = "Temizle";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // txtSearchLogs
+            // 
+            this.txtSearchLogs.Location = new System.Drawing.Point(378, 12);
+            this.txtSearchLogs.Name = "txtSearchLogs";
+            this.txtSearchLogs.Size = new System.Drawing.Size(408, 20);
+            this.txtSearchLogs.TabIndex = 10;
+            this.txtSearchLogs.TextChanged += new System.EventHandler(this.txtSearchLogs_TextChanged);
             // 
             // frmAna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 304);
+            this.ClientSize = new System.Drawing.Size(798, 309);
+            this.Controls.Add(this.txtSearchLogs);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.dgvApiLogs);
             this.Controls.Add(this.chkStartWithWindows);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -246,6 +279,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmAna";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ArtiConnect";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
@@ -258,6 +292,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvApiLogs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -284,6 +319,9 @@
         private System.Windows.Forms.TextBox tbSunucu;
         private System.Windows.Forms.Button btKaydet;
         private System.Windows.Forms.CheckBox chkStartWithWindows;
+        private System.Windows.Forms.DataGridView dgvApiLogs;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TextBox txtSearchLogs;
     }
 }
 

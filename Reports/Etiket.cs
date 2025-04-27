@@ -3,9 +3,9 @@ using System.ComponentModel;
 
 namespace Artı.Reports
 {
-    public partial class Adisyon : DevExpress.XtraReports.UI.XtraReport
+    public partial class Etiket : DevExpress.XtraReports.UI.XtraReport
     {
-        public Adisyon()
+        public Etiket()
         {
             InitializeComponent();
         } 

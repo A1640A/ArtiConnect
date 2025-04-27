@@ -10,9 +10,9 @@ using System.Web.Http;
 
 namespace ArtiConnect.Api.Controllers
 {
-
+    [ApiLogger]
     [RoutePrefix("api/serialPort")]
-    public class SerialPortController : ApiController
+    public class SerialPortController : BaseApiController
     {
         private AppDbContext db = new AppDbContext();
         private static SerialPort _serialPort;
@@ -33,7 +33,6 @@ namespace ArtiConnect.Api.Controllers
             }
             catch (Exception ex)
             {
-                LogApiEvent("COM Port Listeleme Hatası", ex.Message);
                 return BadRequest($"COM portları listelenirken hata oluştu: {ex.Message}");
             }
         }
@@ -70,12 +69,10 @@ namespace ArtiConnect.Api.Controllers
                 // Portu aç
                 _serialPort.Open(); 
 
-                LogApiEvent("COM Port Açıldı", $"Port: {request.PortName}, BaudRate: {request.BaudRate}");
                 return Ok(new { Success = true, Message = $"{request.PortName} portu başarıyla açıldı." });
             }
             catch (Exception ex)
             {
-                LogApiEvent("COM Port Açma Hatası", ex.Message);
                 return BadRequest($"COM portu açılırken hata oluştu: {ex.Message}");
             }
         }
@@ -101,7 +98,6 @@ namespace ArtiConnect.Api.Controllers
                     _serialPort.Dispose();
                     _serialPort = null;
 
-                    LogApiEvent("COM Port Kapatıldı", "COM portu başarıyla kapatıldı.");
                     return Ok(new { Success = true, Message = "COM portu başarıyla kapatıldı." });
                 }
                 else
@@ -111,7 +107,6 @@ namespace ArtiConnect.Api.Controllers
             }
             catch (Exception ex)
             {
-                LogApiEvent("COM Port Kapatma Hatası", ex.Message);
                 return BadRequest($"COM portu kapatılırken hata oluştu: {ex.Message}");
             }
         }
@@ -146,12 +141,10 @@ namespace ArtiConnect.Api.Controllers
                 // Veriyi gönder
                 _serialPort.Write(data, 0, data.Length);
 
-                LogApiEvent("COM Port Veri Gönderildi", $"Gönderilen veri: {request.Data}");
                 return Ok(new { Success = true, Message = "Veri başarıyla gönderildi." });
             }
             catch (Exception ex)
             {
-                LogApiEvent("COM Port Veri Gönderme Hatası", ex.Message);
                 return BadRequest($"Veri gönderilirken hata oluştu: {ex.Message}");
             }
         }
@@ -185,7 +178,6 @@ namespace ArtiConnect.Api.Controllers
             }
             catch (Exception ex)
             {
-                LogApiEvent("COM Port Veri Okuma Hatası", ex.Message);
                 return BadRequest($"Veri okunurken hata oluştu: {ex.Message}");
             }
         }
@@ -219,7 +211,6 @@ namespace ArtiConnect.Api.Controllers
             }
             catch (Exception ex)
             {
-                LogApiEvent("COM Port Durum Kontrolü Hatası", ex.Message);
                 return BadRequest($"COM port durumu kontrol edilirken hata oluştu: {ex.Message}");
             }
         }
@@ -273,31 +264,6 @@ namespace ArtiConnect.Api.Controllers
             }
 
             return bytes;
-        } 
-
-        /// <summary>
-        /// API olaylarını loglar
-        /// </summary>
-        private void LogApiEvent(string eventName, string description)
-        {
-            try
-            {
-                db.ApiLogs.Add(new Entities.ApiLog
-                {
-                    Timestamp = DateTime.Now,
-                    Endpoint = "api/serialPort",
-                    Method = eventName,
-                    RequestData = description,
-                    ResponseData = "",
-                    StatusCode = 200
-                });
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                // Log hatalarını sessizce kaydet
-                System.Diagnostics.Debug.WriteLine($"Log kaydedilirken hata: {ex.Message}");
-            }
-        }
+        }  
     }
 }

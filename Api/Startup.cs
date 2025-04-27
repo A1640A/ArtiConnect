@@ -6,7 +6,9 @@ using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -17,7 +19,7 @@ namespace ArtiConnect.Api
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll); 
 
             // Web API konfigürasyonu
             var config = new HttpConfiguration();
@@ -47,6 +49,12 @@ namespace ArtiConnect.Api
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
 
+            config.Filters.Add(new ApiLoggerAttribute());
+            config.MessageHandlers.Add(new BufferPolicySelector());
+
+            // API Logger middleware'ini ekle - Web API'den ÖNCE ekleyin
+            //app.Use(typeof(ApiLoggerMiddleware));
+
             // OWIN middleware'leri
             app.UseWebApi(config);
 
@@ -59,6 +67,21 @@ namespace ArtiConnect.Api
                 EnableDirectoryBrowsing = true
             };
             app.UseFileServer(fileServerOptions);
+        }
+
+        public class BufferPolicySelector : DelegatingHandler
+        {
+            protected override async Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                // Buffer the request content
+                if (request.Content != null)
+                {
+                    await request.Content.LoadIntoBufferAsync();
+                }
+
+                return await base.SendAsync(request, cancellationToken);
+            }
         }
     }
 }
