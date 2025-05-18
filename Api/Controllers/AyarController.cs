@@ -10,7 +10,7 @@ namespace ArtiConnect.Api.Controllers
 {
     [ApiLogger]
     [RoutePrefix("api/ayar")]
-    public class AyarsController : ApiController
+    public class AyarsController : BaseApiController
     {
         private AppDbContext db = new AppDbContext();
 

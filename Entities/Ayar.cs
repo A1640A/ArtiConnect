@@ -16,5 +16,7 @@ namespace ArtiConnect.Entities
         public string RemoteDbUserName { get; set; }
         public string RemoteDbPassword { get; set; }
         public string RemoteDbDatabaseName { get; set; }
+
+        public string YemekSepetiCurrentToken { get; set; }
     }
 }

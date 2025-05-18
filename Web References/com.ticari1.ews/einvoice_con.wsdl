@@ -1,0 +1,1306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:impl="http://ticari1_webs" xmlns:tns1="http://rpc.xml.coldfusion" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:intf="http://ticari1_webs" targetNamespace="http://ticari1_webs" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ticari1_webs">
+      <xsd:import namespace="http://rpc.xml.coldfusion" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="EinvGetInvCancel">
+        <xsd:sequence>
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvInfoByUUID">
+        <xsd:sequence>
+          <xsd:element name="doc_einv_type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_tax" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_ref_id" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_tax" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOf_xsd_anyType">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soapenc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:anyType[]" ref="soapenc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvExcRates">
+        <xsd:sequence>
+          <xsd:element name="exc_calc_rate" nillable="true" type="xsd:double" />
+          <xsd:element name="exc_curr_code" nillable="true" type="xsd:string" />
+          <xsd:element name="exc_curr_rate_no" nillable="true" type="xsd:double" />
+          <xsd:element name="exc_curr_type" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvNotes">
+        <xsd:sequence>
+          <xsd:element name="doc_note" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_note_no" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvOperLogs">
+        <xsd:sequence>
+          <xsd:element name="doc_log_error_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_log_operation_time" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_log_process_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_log_process_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_log_process_no" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvTaxes">
+        <xsd:sequence>
+          <xsd:element name="doc_tax_no" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_amount_curr" nillable="true" type="xsd:string" />
+          <xsd:element name="tax_exemption_code" nillable="true" type="xsd:string" />
+          <xsd:element name="tax_exemption_reason" nillable="true" type="xsd:string" />
+          <xsd:element name="tax_percent" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_schema_code" nillable="true" type="xsd:string" />
+          <xsd:element name="tax_schema_name" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvInvoicesList">
+        <xsd:sequence>
+          <xsd:element name="InvoicesExcRateList" nillable="true" type="intf:EinvGetInvExcRates" />
+          <xsd:element name="InvoicesExcRates" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="InvoicesNoteList" nillable="true" type="intf:EinvGetInvNotes" />
+          <xsd:element name="InvoicesNotes" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="InvoicesOperLogList" nillable="true" type="intf:EinvGetInvOperLogs" />
+          <xsd:element name="InvoicesOperLogs" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="InvoicesTaxes" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="InvoicesTaxesList" nillable="true" type="intf:EinvGetInvTaxes" />
+          <xsd:element name="allow_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="doc_commercial_scenario_deny_reason" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_commercial_scenario_message" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_commercial_scenario_response" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_curr_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_envelope_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_gtb_fiili_ihracat_tarihi" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_gtb_gcb_tescilno" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_gtb_ref_no" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_issue_date" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_profile" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_record_date" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_sender_receiver_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_receiver_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_receiver_tax" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_type_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_type_name" nillable="true" type="xsd:string" />
+          <xsd:element name="line_ext_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="pay_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_exc_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_inc_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="taxamount" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvList">
+        <xsd:sequence>
+          <xsd:element name="Invoices" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="InvoicesList" nillable="true" type="intf:EinvInvoicesList" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="resp_total_page" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvInvoicesCollXMLList">
+        <xsd:sequence>
+          <xsd:element name="invoiceXml" nillable="true" type="xsd:string" />
+          <xsd:element name="rowNo" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvXmlColl">
+        <xsd:sequence>
+          <xsd:element name="InvoicesCollXML" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="InvoicesCollXMLList" nillable="true" type="intf:EinvInvoicesCollXMLList" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvApprove">
+        <xsd:sequence>
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="response_id" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvPostInvoice">
+        <xsd:sequence>
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="invoice_number" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="response_id" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvCreditNotesList">
+        <xsd:sequence>
+          <xsd:element name="doc_issue_date" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_city" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_country" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_county" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_tax" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_record_date" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_source_curr" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_target_curr" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_uuid" nillable="true" type="xsd:string" />
+          <xsd:element name="exchange_rate" nillable="true" type="xsd:double" />
+          <xsd:element name="line_ext_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="mny_bring_reason" nillable="true" type="xsd:string" />
+          <xsd:element name="mny_origin_country" nillable="true" type="xsd:string" />
+          <xsd:element name="pay_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="statistic_no" nillable="true" type="xsd:string" />
+          <xsd:element name="tax_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_exc_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_inc_amount" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetForexList">
+        <xsd:sequence>
+          <xsd:element name="CreditNotes" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="CreditNotesList" nillable="true" type="intf:EinvCreditNotesList" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="resp_total_page" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvPostForex">
+        <xsd:sequence>
+          <xsd:element name="edoc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="response_id" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetForexPdf">
+        <xsd:sequence>
+          <xsd:element name="eDoc_Pdf" nillable="true" type="xsd:base64Binary" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetForexXml">
+        <xsd:sequence>
+          <xsd:element name="eDoc_Xml" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetForexCancel">
+        <xsd:sequence>
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetDespatchPdf">
+        <xsd:sequence>
+          <xsd:element name="eDoc_Pdf" nillable="true" type="xsd:base64Binary" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvStatus">
+        <xsd:sequence>
+          <xsd:element name="doc_denyReason" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_earchiveCancel_Date" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_earchiveCancel_Detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_earchiveStatus" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_einv_Type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_isApproved" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_Code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_Msg" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_Type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_Code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_Detail" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvDocUsersList">
+        <xsd:sequence>
+          <xsd:element name="user_acc_type" nillable="true" type="xsd:string" />
+          <xsd:element name="user_alias" nillable="true" type="xsd:string" />
+          <xsd:element name="user_create_time" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="user_doc_type" nillable="true" type="xsd:string" />
+          <xsd:element name="user_first_create_time" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="user_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="user_title" nillable="true" type="xsd:string" />
+          <xsd:element name="user_type" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetUserList">
+        <xsd:sequence>
+          <xsd:element name="DocUsers" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="DocUsersList" nillable="true" type="intf:EinvDocUsersList" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="user_count" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetCustType">
+        <xsd:sequence>
+          <xsd:element name="cust_pk_address" nillable="true" type="xsd:string" />
+          <xsd:element name="cust_title" nillable="true" type="xsd:string" />
+          <xsd:element name="cust_type" nillable="true" type="xsd:string" />
+          <xsd:element name="cust_vkn" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EdespGetDespStatus">
+        <xsd:sequence>
+          <xsd:element name="doc_gib_status_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_gib_status_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_in_out_type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_is_doc_process" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_is_edespatch_receiver" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvPdf">
+        <xsd:sequence>
+          <xsd:element name="eDoc_Pdf" nillable="true" type="xsd:base64Binary" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetForexHtml">
+        <xsd:sequence>
+          <xsd:element name="eDoc_Html" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetForexStatus">
+        <xsd:sequence>
+          <xsd:element name="doc_isApproved" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_proc_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_profile" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_id" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_uuid" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvXml">
+        <xsd:sequence>
+          <xsd:element name="eDoc_Xml" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetEdocInfo">
+        <xsd:sequence>
+          <xsd:element name="doc_approve_status" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_deny_reason" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_earchive_cancelDate" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_earchive_cancelDetail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_earchive_status" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_einv_type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_issue_date" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_profile" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_receiver_tax" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_ref_id" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_respond_date" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_respond_status" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_tax" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_uuid" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvInvoicesHeaderList">
+        <xsd:sequence>
+          <xsd:element name="allow_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="doc_commercial_scenario_deny_reason" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_commercial_scenario_message" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_commercial_scenario_response" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_curr_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_gtb_fiili_ihracat_tarihi" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_gtb_gcb_tescilno" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_gtb_ref_no" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_issue_date" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_issue_time" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_profile" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_record_date" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_sender_receiver_city" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_receiver_country" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_receiver_county" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_receiver_identifier" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_receiver_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_sender_receiver_tax" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_type_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_type_name" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_uuid" nillable="true" type="xsd:string" />
+          <xsd:element name="line_ext_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="pay_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_exc_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="tax_inc_amount" nillable="true" type="xsd:double" />
+          <xsd:element name="taxamount" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetInvBaseInfo">
+        <xsd:sequence>
+          <xsd:element name="CustInvoices" nillable="true" type="intf:ArrayOf_xsd_anyType" />
+          <xsd:element name="InvoicesHeaderList" nillable="true" type="intf:EinvInvoicesHeaderList" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="resp_total_page" nillable="true" type="xsd:double" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvPostDespatch">
+        <xsd:sequence>
+          <xsd:element name="despatch_number" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+          <xsd:element name="response_id" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvGetForexInfoByUUID">
+        <xsd:sequence>
+          <xsd:element name="doc_issue_date" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="doc_number" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_profile" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_reference_id" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_response_id" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_code" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_status_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_type" nillable="true" type="xsd:string" />
+          <xsd:element name="doc_uuid" nillable="true" type="xsd:string" />
+          <xsd:element name="err_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_code" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_msg" nillable="true" type="xsd:string" />
+          <xsd:element name="resp_status" nillable="true" type="xsd:boolean" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="EinvUserLoginResp">
+        <xsd:sequence>
+          <xsd:element name="error_code" nillable="true" type="xsd:string" />
+          <xsd:element name="error_detail" nillable="true" type="xsd:string" />
+          <xsd:element name="is_success" nillable="true" type="xsd:boolean" />
+          <xsd:element name="user_msg" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://rpc.xml.coldfusion">
+      <xsd:import namespace="http://ticari1_webs" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:complexType name="CFCInvocationException">
+        <xsd:sequence />
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getInvListResponse">
+    <wsdl:part name="getInvListReturn" type="intf:EinvGetInvList" />
+  </wsdl:message>
+  <wsdl:message name="getForexInfoListResponse">
+    <wsdl:part name="getForexInfoListReturn" type="intf:EinvGetForexList" />
+  </wsdl:message>
+  <wsdl:message name="postForexDocResponse">
+    <wsdl:part name="postForexDocReturn" type="intf:EinvPostForex" />
+  </wsdl:message>
+  <wsdl:message name="getForexInfoListRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="doc_start_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_finish_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_page_no" type="xsd:double" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="department_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDespStatusResponse">
+    <wsdl:part name="getDespStatusReturn" type="intf:EdespGetDespStatus" />
+  </wsdl:message>
+  <wsdl:message name="getForexXMLResponse">
+    <wsdl:part name="getForexXMLReturn" type="intf:EinvGetForexXml" />
+  </wsdl:message>
+  <wsdl:message name="getUserListRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="page_no" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getForexPDFResponse">
+    <wsdl:part name="getForexPDFReturn" type="intf:EinvGetForexPdf" />
+  </wsdl:message>
+  <wsdl:message name="getInvCancelResponse">
+    <wsdl:part name="getInvCancelReturn" type="intf:EinvGetInvCancel" />
+  </wsdl:message>
+  <wsdl:message name="getForexHtmlRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response_id" type="xsd:string" />
+    <wsdl:part name="doc_uuid" type="xsd:string" />
+    <wsdl:part name="doc_number" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDespatchPDFResponse">
+    <wsdl:part name="getDespatchPDFReturn" type="intf:EinvGetDespatchPdf" />
+  </wsdl:message>
+  <wsdl:message name="getDespatchPDFRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response" type="xsd:string" />
+    <wsdl:part name="doc_type" type="xsd:double" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getUserListResponse">
+    <wsdl:part name="getUserListReturn" type="intf:EinvGetUserList" />
+  </wsdl:message>
+  <wsdl:message name="getInvXMLResponse">
+    <wsdl:part name="getInvXMLReturn" type="intf:EinvGetInvXml" />
+  </wsdl:message>
+  <wsdl:message name="getEdocInfoRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="doc_uuid" type="xsd:string" />
+    <wsdl:part name="doc_identifier" type="xsd:string" />
+    <wsdl:part name="ref_doc_id" type="xsd:string" />
+    <wsdl:part name="doc_type" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="getInvInfoByUUIDRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="doc_uuid" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="getInvInfoByUUIDResponse">
+    <wsdl:part name="getInvInfoByUUIDReturn" type="intf:EinvGetInvInfoByUUID" />
+  </wsdl:message>
+  <wsdl:message name="getCustInvTypeResponse">
+    <wsdl:part name="getCustInvTypeReturn" type="intf:EinvGetCustType" />
+  </wsdl:message>
+  <wsdl:message name="getInvApproveResponse">
+    <wsdl:part name="getInvApproveReturn" type="intf:EinvGetInvApprove" />
+  </wsdl:message>
+  <wsdl:message name="getInvBasicInfoRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="doc_start_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_finish_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_page_no" type="xsd:double" />
+    <wsdl:part name="doc_einv_type" type="xsd:string" />
+    <wsdl:part name="sender_vkn" type="xsd:string" />
+    <wsdl:part name="doc_inout_type" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="getForexInfoByUUIDResponse">
+    <wsdl:part name="getForexInfoByUUIDReturn" type="intf:EinvGetForexInfoByUUID" />
+  </wsdl:message>
+  <wsdl:message name="getInvListRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="doc_start_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_finish_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_page_no" type="xsd:double" />
+    <wsdl:part name="doc_einv_type" type="xsd:double" />
+    <wsdl:part name="doc_in_out_type" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceResponse">
+    <wsdl:part name="checkServiceReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getInvCancelRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="doc_response" type="xsd:string" />
+    <wsdl:part name="doc_cancel_date" type="xsd:string" />
+    <wsdl:part name="doc_cancel_detail" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getForexCancelResponse">
+    <wsdl:part name="getForexCancelReturn" type="intf:EinvGetForexCancel" />
+  </wsdl:message>
+  <wsdl:message name="getInvXMLCollResponse">
+    <wsdl:part name="getInvXMLCollReturn" type="intf:EinvGetInvXmlColl" />
+  </wsdl:message>
+  <wsdl:message name="getForexXMLRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response_id" type="xsd:string" />
+    <wsdl:part name="doc_number" type="xsd:string" />
+    <wsdl:part name="doc_uuid" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getInvStatusRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="doc_response" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getInvPDFRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response" type="xsd:string" />
+    <wsdl:part name="doc_type" type="xsd:double" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="doc_number" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getCustInvTypeRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getForexPDFRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response_id" type="xsd:string" />
+    <wsdl:part name="doc_uuid" type="xsd:string" />
+    <wsdl:part name="doc_number" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getInvBasicInfoResponse">
+    <wsdl:part name="getInvBasicInfoReturn" type="intf:EinvGetInvBaseInfo" />
+  </wsdl:message>
+  <wsdl:message name="postInvoiceJsonResponse">
+    <wsdl:part name="postInvoiceJsonReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="userLoginRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="postDespatchResponse">
+    <wsdl:part name="postDespatchReturn" type="intf:EinvPostDespatch" />
+  </wsdl:message>
+  <wsdl:message name="getInvApproveRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response" type="xsd:string" />
+    <wsdl:part name="doc_is_approve" type="xsd:string" />
+    <wsdl:part name="doc_approve_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_deny_detail" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="userLoginResponse">
+    <wsdl:part name="userLoginReturn" type="intf:EinvUserLoginResp" />
+  </wsdl:message>
+  <wsdl:message name="getInvStatusResponse">
+    <wsdl:part name="getInvStatusReturn" type="intf:EinvGetInvStatus" />
+  </wsdl:message>
+  <wsdl:message name="getForexHtmlResponse">
+    <wsdl:part name="getForexHtmlReturn" type="intf:EinvGetForexHtml" />
+  </wsdl:message>
+  <wsdl:message name="getForexCancelRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="doc_response_id" type="xsd:string" />
+    <wsdl:part name="doc_cancel_date" type="xsd:string" />
+    <wsdl:part name="doc_cancel_detail" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postInvoiceJsonRequest">
+    <wsdl:part name="invoiceData" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postForexResponse">
+    <wsdl:part name="postForexReturn" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="CFCInvocationException">
+    <wsdl:part name="fault" type="tns1:CFCInvocationException" />
+  </wsdl:message>
+  <wsdl:message name="getForexStatusRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response_id" type="xsd:string" />
+    <wsdl:part name="doc_uuid" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getInvXMLCollRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_start_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_finish_date" type="xsd:dateTime" />
+    <wsdl:part name="doc_type" type="xsd:double" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getForexInfoByUUIDRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_uuid" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="checkServiceRequest" />
+  <wsdl:message name="getInvPDFResponse">
+    <wsdl:part name="getInvPDFReturn" type="intf:EinvGetInvPdf" />
+  </wsdl:message>
+  <wsdl:message name="postInvoiceRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="invoice_xml" type="xsd:string" />
+    <wsdl:part name="earchive_send_type" type="xsd:double" />
+    <wsdl:part name="ref_doc_id" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="is_doc_send" type="xsd:double" />
+    <wsdl:part name="receiver_pk_address" type="xsd:string" />
+    <wsdl:part name="department_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postForexDocRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="edoc_forex_xml" type="xsd:string" />
+    <wsdl:part name="send_type" type="xsd:double" />
+    <wsdl:part name="ref_doc_id" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="department_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDespStatusRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="doc_response" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getEdocInfoResponse">
+    <wsdl:part name="getEdocInfoReturn" type="intf:EinvGetEdocInfo" />
+  </wsdl:message>
+  <wsdl:message name="getInvXMLRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="doc_response" type="xsd:string" />
+    <wsdl:part name="doc_type" type="xsd:double" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="doc_number" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postInvoiceResponse">
+    <wsdl:part name="postInvoiceReturn" type="intf:EinvPostInvoice" />
+  </wsdl:message>
+  <wsdl:message name="getForexStatusResponse">
+    <wsdl:part name="getForexStatusReturn" type="intf:EinvGetForexStatus" />
+  </wsdl:message>
+  <wsdl:message name="postDespatchRequest">
+    <wsdl:part name="username" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+    <wsdl:part name="customer_vkn" type="xsd:string" />
+    <wsdl:part name="customer_id" type="xsd:double" />
+    <wsdl:part name="despatch_xml" type="xsd:string" />
+    <wsdl:part name="doc_despatch_type" type="xsd:double" />
+    <wsdl:part name="ref_despatch_id" type="xsd:string" />
+    <wsdl:part name="integ_code" type="xsd:string" />
+    <wsdl:part name="software_name" type="xsd:string" />
+    <wsdl:part name="receiver_pk_address" type="xsd:string" />
+    <wsdl:part name="department_code" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="postForexRequest">
+    <wsdl:part name="forexData" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="Einvoice_con">
+    <wsdl:operation name="getInvCancel" parameterOrder="username password customer_id doc_response doc_cancel_date doc_cancel_detail software_name integ_code">
+      <wsdl:input name="getInvCancelRequest" message="intf:getInvCancelRequest" />
+      <wsdl:output name="getInvCancelResponse" message="intf:getInvCancelResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvInfoByUUID" parameterOrder="username password doc_uuid customer_id">
+      <wsdl:input name="getInvInfoByUUIDRequest" message="intf:getInvInfoByUUIDRequest" />
+      <wsdl:output name="getInvInfoByUUIDResponse" message="intf:getInvInfoByUUIDResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvList" parameterOrder="username password customer_id integ_code software_name doc_start_date doc_finish_date doc_page_no doc_einv_type doc_in_out_type">
+      <wsdl:input name="getInvListRequest" message="intf:getInvListRequest" />
+      <wsdl:output name="getInvListResponse" message="intf:getInvListResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvXMLColl" parameterOrder="username password customer_id customer_vkn doc_start_date doc_finish_date doc_type software_name integ_code">
+      <wsdl:input name="getInvXMLCollRequest" message="intf:getInvXMLCollRequest" />
+      <wsdl:output name="getInvXMLCollResponse" message="intf:getInvXMLCollResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvApprove" parameterOrder="username password customer_id customer_vkn doc_response doc_is_approve doc_approve_date doc_deny_detail software_name integ_code">
+      <wsdl:input name="getInvApproveRequest" message="intf:getInvApproveRequest" />
+      <wsdl:output name="getInvApproveResponse" message="intf:getInvApproveResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="postInvoice" parameterOrder="username password customer_vkn customer_id invoice_xml earchive_send_type ref_doc_id integ_code software_name is_doc_send receiver_pk_address department_code">
+      <wsdl:input name="postInvoiceRequest" message="intf:postInvoiceRequest" />
+      <wsdl:output name="postInvoiceResponse" message="intf:postInvoiceResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getForexInfoList" parameterOrder="username password customer_vkn customer_id doc_start_date doc_finish_date doc_page_no integ_code software_name department_code">
+      <wsdl:input name="getForexInfoListRequest" message="intf:getForexInfoListRequest" />
+      <wsdl:output name="getForexInfoListResponse" message="intf:getForexInfoListResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="postForex" parameterOrder="forexData">
+      <wsdl:input name="postForexRequest" message="intf:postForexRequest" />
+      <wsdl:output name="postForexResponse" message="intf:postForexResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="postForexDoc" parameterOrder="username password customer_vkn customer_id edoc_forex_xml send_type ref_doc_id integ_code software_name department_code">
+      <wsdl:input name="postForexDocRequest" message="intf:postForexDocRequest" />
+      <wsdl:output name="postForexDocResponse" message="intf:postForexDocResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getForexPDF" parameterOrder="username password customer_id customer_vkn doc_response_id doc_uuid doc_number software_name integ_code">
+      <wsdl:input name="getForexPDFRequest" message="intf:getForexPDFRequest" />
+      <wsdl:output name="getForexPDFResponse" message="intf:getForexPDFResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getForexXML" parameterOrder="username password customer_id customer_vkn doc_response_id doc_number doc_uuid software_name integ_code">
+      <wsdl:input name="getForexXMLRequest" message="intf:getForexXMLRequest" />
+      <wsdl:output name="getForexXMLResponse" message="intf:getForexXMLResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getForexCancel" parameterOrder="username password customer_id doc_response_id doc_cancel_date doc_cancel_detail software_name integ_code">
+      <wsdl:input name="getForexCancelRequest" message="intf:getForexCancelRequest" />
+      <wsdl:output name="getForexCancelResponse" message="intf:getForexCancelResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getDespatchPDF" parameterOrder="username password customer_id customer_vkn doc_response doc_type software_name integ_code">
+      <wsdl:input name="getDespatchPDFRequest" message="intf:getDespatchPDFRequest" />
+      <wsdl:output name="getDespatchPDFResponse" message="intf:getDespatchPDFResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvStatus" parameterOrder="username password doc_response customer_id software_name integ_code">
+      <wsdl:input name="getInvStatusRequest" message="intf:getInvStatusRequest" />
+      <wsdl:output name="getInvStatusResponse" message="intf:getInvStatusResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserList" parameterOrder="username password page_no customer_vkn">
+      <wsdl:input name="getUserListRequest" message="intf:getUserListRequest" />
+      <wsdl:output name="getUserListResponse" message="intf:getUserListResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCustInvType" parameterOrder="username password customer_vkn">
+      <wsdl:input name="getCustInvTypeRequest" message="intf:getCustInvTypeRequest" />
+      <wsdl:output name="getCustInvTypeResponse" message="intf:getCustInvTypeResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="postInvoiceJson" parameterOrder="invoiceData">
+      <wsdl:input name="postInvoiceJsonRequest" message="intf:postInvoiceJsonRequest" />
+      <wsdl:output name="postInvoiceJsonResponse" message="intf:postInvoiceJsonResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getDespStatus" parameterOrder="username password doc_response customer_id software_name integ_code">
+      <wsdl:input name="getDespStatusRequest" message="intf:getDespStatusRequest" />
+      <wsdl:output name="getDespStatusResponse" message="intf:getDespStatusResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvPDF" parameterOrder="username password customer_id customer_vkn doc_response doc_type software_name integ_code doc_number">
+      <wsdl:input name="getInvPDFRequest" message="intf:getInvPDFRequest" />
+      <wsdl:output name="getInvPDFResponse" message="intf:getInvPDFResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getForexHtml" parameterOrder="username password customer_id customer_vkn doc_response_id doc_uuid doc_number software_name integ_code">
+      <wsdl:input name="getForexHtmlRequest" message="intf:getForexHtmlRequest" />
+      <wsdl:output name="getForexHtmlResponse" message="intf:getForexHtmlResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getForexStatus" parameterOrder="username password customer_id customer_vkn doc_response_id doc_uuid software_name integ_code">
+      <wsdl:input name="getForexStatusRequest" message="intf:getForexStatusRequest" />
+      <wsdl:output name="getForexStatusResponse" message="intf:getForexStatusResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvXML" parameterOrder="username password customer_id customer_vkn doc_response doc_type software_name integ_code doc_number">
+      <wsdl:input name="getInvXMLRequest" message="intf:getInvXMLRequest" />
+      <wsdl:output name="getInvXMLResponse" message="intf:getInvXMLResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getEdocInfo" parameterOrder="username password customer_id doc_uuid doc_identifier ref_doc_id doc_type">
+      <wsdl:input name="getEdocInfoRequest" message="intf:getEdocInfoRequest" />
+      <wsdl:output name="getEdocInfoResponse" message="intf:getEdocInfoResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvBasicInfo" parameterOrder="username password customer_vkn customer_id integ_code software_name doc_start_date doc_finish_date doc_page_no doc_einv_type sender_vkn doc_inout_type">
+      <wsdl:input name="getInvBasicInfoRequest" message="intf:getInvBasicInfoRequest" />
+      <wsdl:output name="getInvBasicInfoResponse" message="intf:getInvBasicInfoResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="postDespatch" parameterOrder="username password customer_vkn customer_id despatch_xml doc_despatch_type ref_despatch_id integ_code software_name receiver_pk_address department_code">
+      <wsdl:input name="postDespatchRequest" message="intf:postDespatchRequest" />
+      <wsdl:output name="postDespatchResponse" message="intf:postDespatchResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="getForexInfoByUUID" parameterOrder="username password customer_id customer_vkn doc_uuid">
+      <wsdl:input name="getForexInfoByUUIDRequest" message="intf:getForexInfoByUUIDRequest" />
+      <wsdl:output name="getForexInfoByUUIDResponse" message="intf:getForexInfoByUUIDResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="checkService">
+      <wsdl:input name="checkServiceRequest" message="intf:checkServiceRequest" />
+      <wsdl:output name="checkServiceResponse" message="intf:checkServiceResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+    <wsdl:operation name="userLogin" parameterOrder="username password customer_id">
+      <wsdl:input name="userLoginRequest" message="intf:userLoginRequest" />
+      <wsdl:output name="userLoginResponse" message="intf:userLoginResponse" />
+      <wsdl:fault name="CFCInvocationException" message="intf:CFCInvocationException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="einvoice_con.cfcSoapBinding" type="intf:Einvoice_con">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getInvCancel">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvCancelRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvCancelResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvInfoByUUID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvInfoByUUIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvInfoByUUIDResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvList">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvListRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvListResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvXMLColl">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvXMLCollRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvXMLCollResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvApprove">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvApproveRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvApproveResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="postInvoice">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="postInvoiceRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="postInvoiceResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getForexInfoList">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getForexInfoListRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getForexInfoListResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="postForex">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="postForexRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="postForexResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="postForexDoc">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="postForexDocRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="postForexDocResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getForexPDF">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getForexPDFRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getForexPDFResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getForexXML">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getForexXMLRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getForexXMLResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getForexCancel">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getForexCancelRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getForexCancelResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDespatchPDF">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDespatchPDFRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getDespatchPDFResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvStatusRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvStatusResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getUserList">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getUserListRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getUserListResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCustInvType">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getCustInvTypeRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getCustInvTypeResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="postInvoiceJson">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="postInvoiceJsonRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="postInvoiceJsonResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDespStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getDespStatusRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getDespStatusResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvPDF">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvPDFRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvPDFResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getForexHtml">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getForexHtmlRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getForexHtmlResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getForexStatus">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getForexStatusRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getForexStatusResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvXML">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvXMLRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvXMLResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getEdocInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getEdocInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getEdocInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getInvBasicInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getInvBasicInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getInvBasicInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="postDespatch">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="postDespatchRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="postDespatchResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getForexInfoByUUID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getForexInfoByUUIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getForexInfoByUUIDResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkService">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="checkServiceRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="checkServiceResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="userLogin">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="userLoginRequest">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="userLoginResponse">
+        <wsdlsoap:body use="encoded" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+      <wsdl:fault name="CFCInvocationException">
+        <wsdlsoap:fault use="encoded" name="CFCInvocationException" namespace="http://ticari1_webs" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Ticari1_eInvoice_Con_Web_Services">
+    <wsdl:documentation>
+Ticari1 eInvoice Con Web Service Core Component  </wsdl:documentation>
+    <wsdl:port name="einvoice_con.cfc" binding="intf:einvoice_con.cfcSoapBinding">
+      <wsdlsoap:address location="https://ews.ticari1.com/ticari1_webs/einvoice_con.cfc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
