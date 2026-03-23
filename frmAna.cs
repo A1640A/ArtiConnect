@@ -1,5 +1,6 @@
 ﻿using ArtiConnect.DataAccess;
 using ArtiConnect.Entities;
+using ArtiConnect.Hugin;
 using ArtiConnect.Managers;
 using Microsoft.Owin.Hosting;
 using Newtonsoft.Json;
@@ -33,6 +34,7 @@ namespace ArtiConnect
         private ContextMenuStrip trayMenu;
         private bool _startMinimized = false;
         private BindingList<ApiLog> apiLogs = new BindingList<ApiLog>();
+        SerialNotify serialNtf = new SerialNotify();
 
         public frmAna(bool startMinimized = false)
         {
@@ -356,7 +358,19 @@ namespace ArtiConnect
                     "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 chkStartWithWindows.Enabled = false;
             }
+
+            if (chkStartWithWindows.Checked)
+            {
+                btnStart_Click(null, null);
+            }
+
             isLoading = false;
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            serialNtf.DeviceChange(this, m);
+            base.WndProc(ref m);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -610,6 +624,7 @@ namespace ArtiConnect
 
         private void chkStartWithWindows_CheckedChanged(object sender, EventArgs e)
         {
+            if (isLoading) return;
             if (_startupManager == null) return;
 
             try

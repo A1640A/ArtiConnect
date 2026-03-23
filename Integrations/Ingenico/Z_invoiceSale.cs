@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ArtiConnect.Integrations.Ingenico
+{
+    public struct Z_invoiceSale
+    {
+        public ushort KoltukSayisi;
+
+        public ushort reserved;
+
+        public long totalAmount;
+
+        public long totalTax;
+    }
+
+}

@@ -204,9 +204,9 @@ namespace ArtiConnect.Api.Controllers
 
                     // SQL sorgusu oluştur
                     var query = @"INSERT INTO SubeOdeme 
-                (SubeKodu, FisId, AdisyonNo, FisTarihi, KullaniciAdi, OdemeYontemiAdi, Miktar, KayitTarihi, Durum) 
+                (SubeKodu, FisId, AdisyonNo, FisTarihi, KullaniciAdi, OdemeYontemiAdi, Miktar, KayitTarihi, Durum, IsCariOdeme) 
                 VALUES 
-                (@SubeKodu, @FisId, @AdisyonNo, @FisTarihi, @KullaniciAdi, @OdemeYontemiAdi, @Miktar, @KayitTarihi, @Durum)";
+                (@SubeKodu, @FisId, @AdisyonNo, @FisTarihi, @KullaniciAdi, @OdemeYontemiAdi, @Miktar, @KayitTarihi, @Durum, 0)";
 
                     using (var command = new SqlCommand(query, sqlConnection))
                     {

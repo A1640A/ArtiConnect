@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,8 @@ namespace ArtiConnect.Api.Modals.Printer
 {
     public class PrintLabelRequestModal
     {
-        public string ProductName { get; set; }
-        public string Barcode { get; set; }
-        public float Price { get; set; }
+        [JsonExtensionData]
+        public Dictionary<string, object> LabelData { get; set; }
 
         public string FileName { get; set; }
         public int CopyNumber { get; set; }

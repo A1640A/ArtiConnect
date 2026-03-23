@@ -18,7 +18,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -40,7 +40,31 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>bin\Debug\ArtiConnect.xml</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.1.66\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
       <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.dll</HintPath>
     </Reference>
@@ -232,11 +256,23 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="InposExt.Net">
-      <HintPath>..\ExtTest.Net\ExtTest.Net\ExtTest\bin\InposExt.Net.dll</HintPath>
+    <Reference Include="Hugin.Common">
+      <HintPath>..\SIRKETLER\ARTI\Artı\Artı\bin\Debug\Hugin.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    <Reference Include="Hugin.ExDevice.DiffieHellman">
+      <HintPath>..\SIRKETLER\ARTI\Artı\Artı\bin\Debug\Hugin.ExDevice.DiffieHellman.dll</HintPath>
+    </Reference>
+    <Reference Include="Hugin.GMPCommon">
+      <HintPath>..\SIRKETLER\ARTI\Artı\Artı\bin\Debug\Hugin.GMPCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="Hugin.POS.CompactPrinter.FP300">
+      <HintPath>..\SIRKETLER\ARTI\Artı\Artı\bin\Debug\Hugin.POS.CompactPrinter.FP300.dll</HintPath>
+    </Reference>
+    <Reference Include="InposExt.Net">
+      <HintPath>bin\Debug\InposExt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -277,8 +313,15 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PAYGO_OKC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PAYGO\YENIVERSIYON\X64_Release2025070703 (1)\Release\PAYGO_OKC.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=112.1.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>packages\RestSharp.112.1.0\lib\net471\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=4.3.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>packages\Serilog.4.3.0\lib\net471\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="SharpCompress, Version=0.17.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>packages\SharpCompress.0.17.1\lib\net45\SharpCompress.dll</HintPath>
@@ -294,6 +337,7 @@
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.117.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\lib\net46\System.Data.SQLite.dll</HintPath>
@@ -307,7 +351,11 @@
     <Reference Include="System.Data.SQLite.Linq, Version=1.0.117.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.SQLite.Linq.1.0.117.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -326,6 +374,9 @@
     </Reference>
     <Reference Include="System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Text.Json.8.0.4\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Channels.8.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -361,22 +412,105 @@
     <Compile Include="Api\ApiLoggerAttribute.cs" />
     <Compile Include="Api\BaseApiController.cs" />
     <Compile Include="Api\Controllers\AyarController.cs" />
+    <Compile Include="Api\Controllers\DaraSecenegiController.cs" />
+    <Compile Include="Api\Controllers\DigiController.cs" />
     <Compile Include="Api\Controllers\EFaturaController.cs" />
+    <Compile Include="Api\Controllers\HuginController.cs" />
+    <Compile Include="Api\Controllers\IngenicoController.cs" />
     <Compile Include="Api\Controllers\InposController.cs" />
+    <Compile Include="Api\Controllers\KullaniciController.cs" />
+    <Compile Include="Api\Controllers\MasrafKategorisiController.cs" />
+    <Compile Include="Api\Controllers\PayGoController.cs" />
     <Compile Include="Api\Controllers\PrinterController.cs" />
     <Compile Include="Api\Controllers\RemoteServerController.cs" />
     <Compile Include="Api\Controllers\SerialPortController.cs" />
+    <Compile Include="Api\Controllers\StokKartiController.cs" />
+    <Compile Include="Api\Controllers\StokSayimController.cs" />
+    <Compile Include="Api\Controllers\SubeController.cs" />
+    <Compile Include="Api\Controllers\SubeGunSonuKasasiController.cs" />
+    <Compile Include="Api\Controllers\SubeMasrafController.cs" />
+    <Compile Include="Api\Controllers\SubeUrunController.cs" />
+    <Compile Include="Api\Controllers\SubeUrunGrubuController.cs" />
     <Compile Include="Api\Controllers\YemekSepetiController.cs" />
     <Compile Include="Api\Modals\AddSubeOdemeRequestModal.cs" />
     <Compile Include="Api\Modals\AddSubeSatisRequestModal.cs" />
+    <Compile Include="Api\Modals\AyarResponseModel.cs" />
+    <Compile Include="Api\Modals\DaraSecenegiRequestModel.cs" />
+    <Compile Include="Api\Modals\DaraSecenegiResponseModel.cs" />
+    <Compile Include="Api\Modals\Enums\Birim.cs" />
+    <Compile Include="Api\Modals\Enums\StokTuru.cs" />
+    <Compile Include="Api\Modals\Hugin\Common.cs" />
+    <Compile Include="Api\Modals\Hugin\Connection.cs" />
+    <Compile Include="Api\Modals\Hugin\CPResponse.cs" />
+    <Compile Include="Api\Modals\Hugin\Enums.cs" />
+    <Compile Include="Api\Modals\Hugin\ErrorCode.cs" />
+    <Compile Include="Api\Modals\Hugin\FormMessage.cs" />
+    <Compile Include="Api\Modals\Hugin\HuginEntegrasyon.cs" />
+    <Compile Include="Api\Modals\Hugin\IBridge.cs" />
+    <Compile Include="Api\Modals\Hugin\StatusCode.cs" />
     <Compile Include="Api\Modals\Inpos\AddPaymentRequest.cs" />
     <Compile Include="Api\Modals\Inpos\AddSaleItemRequest.cs" />
     <Compile Include="Api\Modals\Inpos\InposConnectRequest.cs" />
     <Compile Include="Api\Modals\Inpos\SectionInfo.cs" />
     <Compile Include="Api\Modals\Inpos\SetSaleTypeRequest.cs" />
+    <Compile Include="Api\Modals\KullaniciDto.cs" />
+    <Compile Include="Api\Modals\KullaniciRequestModel.cs" />
+    <Compile Include="Api\Modals\KullaniciResponseModel.cs" />
+    <Compile Include="Api\Modals\LoginRequestModel.cs" />
+    <Compile Include="Api\Modals\MasrafKategorisiRequestModel.cs" />
+    <Compile Include="Api\Modals\MasrafKategorisiResponseModel.cs" />
+    <Compile Include="Api\Modals\MasrafRaporRequestModel.cs" />
+    <Compile Include="Api\Modals\MasrafRaporResponseModel.cs" />
+    <Compile Include="Api\Modals\PayGo\AddBatchItemRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\BatchItem.cs" />
+    <Compile Include="Api\Modals\PayGo\BatchTransactionRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\CarParkRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\CashierLoginRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\ChangeEcrModeRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\CloseDocumentRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\CreateBatchRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\DoPaymentRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\DoTransactionRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\DrawerRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\ExecuteBatchRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\FreePrintBatchRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\FreePrintRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\FreeTextInfo.cs" />
+    <Compile Include="Api\Modals\PayGo\HeaderLine.cs" />
+    <Compile Include="Api\Modals\PayGo\NonTaxItemRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\OpenDocumentRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\PayGoConnectRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\PrintReceiptRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\PrintReportRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\SerialConnectRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\SetDepartmentRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\SetExchangeRateRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\SetGroupRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\SetHeaderRequest.cs" />
+    <Compile Include="Api\Modals\PayGo\SetPLURequest.cs" />
     <Compile Include="Api\Modals\Printer\PrintLabelRequestModal.cs" />
     <Compile Include="Api\Modals\SendDataRequestModal.cs" />
     <Compile Include="Api\Modals\SerialPortRequestModal.cs" />
+    <Compile Include="Api\Modals\StokKartiFilterModel.cs" />
+    <Compile Include="Api\Modals\StokKartiRequestModel.cs" />
+    <Compile Include="Api\Modals\StokKartiResponseModel.cs" />
+    <Compile Include="Api\Modals\StokSayimKartiRequestModel.cs" />
+    <Compile Include="Api\Modals\StokSayimKartiResponseModel.cs" />
+    <Compile Include="Api\Modals\StokSayimKartiResult.cs" />
+    <Compile Include="Api\Modals\StokSayimUrunRequestModel.cs" />
+    <Compile Include="Api\Modals\StokSayimUrunResponseModel.cs" />
+    <Compile Include="Api\Modals\SubeGunSonuKasasi.cs" />
+    <Compile Include="Api\Modals\SubeMasrafFilterModel.cs" />
+    <Compile Include="Api\Modals\SubeMasrafRequestModel.cs" />
+    <Compile Include="Api\Modals\SubeMasrafResponseModel.cs" />
+    <Compile Include="Api\Modals\SubeRequestModel.cs" />
+    <Compile Include="Api\Modals\SubeResponseModel.cs" />
+    <Compile Include="Api\Modals\SubeStokSayimKartiRequestModel.cs" />
+    <Compile Include="Api\Modals\SubeUrunFilterModel.cs" />
+    <Compile Include="Api\Modals\SubeUrunGrubuRequestModel.cs" />
+    <Compile Include="Api\Modals\SubeUrunGrubuResponseModel.cs" />
+    <Compile Include="Api\Modals\SubeUrunRequestModel.cs" />
+    <Compile Include="Api\Modals\SubeUrunResponseModel.cs" />
     <Compile Include="Api\Modals\Ticari1\EArsivIptalRequest.cs" />
     <Compile Include="Api\Modals\Ticari1\EFaturaPdfRequest.cs" />
     <Compile Include="Api\Modals\Ticari1\EFaturaRequest.cs" />
@@ -400,6 +534,135 @@
     <Compile Include="frmGuncelle.Designer.cs">
       <DependentUpon>frmGuncelle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Integrations\Ingenico\Calculation.cs" />
+    <Compile Include="Integrations\Ingenico\Customer.cs" />
+    <Compile Include="Integrations\Ingenico\Defines.cs" />
+    <Compile Include="Integrations\Ingenico\DEVICE_INFO_t.cs" />
+    <Compile Include="Integrations\Ingenico\Discount.cs" />
+    <Compile Include="Integrations\Ingenico\DiscountSubtypes.cs" />
+    <Compile Include="Integrations\Ingenico\EBANK_APLICATION_TRANSACTION_FLAGS_t.cs" />
+    <Compile Include="Integrations\Ingenico\EConditionIds.cs" />
+    <Compile Include="Integrations\Ingenico\EConditionTest.cs" />
+    <Compile Include="Integrations\Ingenico\EcrInterface.cs" />
+    <Compile Include="Integrations\Ingenico\ECurrency.cs" />
+    <Compile Include="Integrations\Ingenico\EInfo.cs" />
+    <Compile Include="Integrations\Ingenico\EInvoiceFlags.cs" />
+    <Compile Include="Integrations\Ingenico\EItemOptions.cs" />
+    <Compile Include="Integrations\Ingenico\EItemPromotionType.cs" />
+    <Compile Include="Integrations\Ingenico\EItemUnitTypes.cs" />
+    <Compile Include="Integrations\Ingenico\EKU_INFO_t.cs" />
+    <Compile Include="Integrations\Ingenico\EKU_INI_CLS_t.cs" />
+    <Compile Include="Integrations\Ingenico\EKU_RECORD_t.cs" />
+    <Compile Include="Integrations\Ingenico\EKU_STATUS_t.cs" />
+    <Compile Include="Integrations\Ingenico\EPaymentSubtypes.cs" />
+    <Compile Include="Integrations\Ingenico\EPaymentTypes.cs" />
+    <Compile Include="Integrations\Ingenico\EPaymentTypesClass.cs" />
+    <Compile Include="Integrations\Ingenico\ErrorManager.cs" />
+    <Compile Include="Integrations\Ingenico\ETransactionFiscalType.cs" />
+    <Compile Include="Integrations\Ingenico\ETransactionFlags.cs" />
+    <Compile Include="Integrations\Ingenico\ETypeOfMatrahsiz.cs" />
+    <Compile Include="Integrations\Ingenico\EVasType.cs" />
+    <Compile Include="Integrations\Ingenico\FISCAL_INTEGRITY_t.cs" />
+    <Compile Include="Integrations\Ingenico\FunctionFlags.cs" />
+    <Compile Include="Integrations\Ingenico\GMPSmartDLL.cs" />
+    <Compile Include="Integrations\Ingenico\GMP_Tools.cs" />
+    <Compile Include="Integrations\Ingenico\Json_GMPSmartDLL.cs" />
+    <Compile Include="Integrations\Ingenico\Logging.cs" />
+    <Compile Include="Integrations\Ingenico\LogType.cs" />
+    <Compile Include="Integrations\Ingenico\MEMORY_INFO_t.cs" />
+    <Compile Include="Integrations\Ingenico\Order.cs" />
+    <Compile Include="Integrations\Ingenico\Payment.cs" />
+    <Compile Include="Integrations\Ingenico\PaymentStatus.cs" />
+    <Compile Include="Integrations\Ingenico\promotion.cs" />
+    <Compile Include="Integrations\Ingenico\Resources.cs" />
+    <Compile Include="Integrations\Ingenico\Root.cs" />
+    <Compile Include="Integrations\Ingenico\SmartDllClient.cs" />
+    <Compile Include="Integrations\Ingenico\SmartDllClientException.cs" />
+    <Compile Include="Integrations\Ingenico\ST_BankSubPaymentInfo.cs" />
+    <Compile Include="Integrations\Ingenico\ST_BANK_PAYMENT_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_BilgiFisi.cs" />
+    <Compile Include="Integrations\Ingenico\ST_BilgiFisleri.cs" />
+    <Compile Include="Integrations\Ingenico\ST_CARD_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_CASHIER.cs" />
+    <Compile Include="Integrations\Ingenico\ST_CONDITIONAL_IF.cs" />
+    <Compile Include="Integrations\Ingenico\ST_DATABASE_COLOMN.cs" />
+    <Compile Include="Integrations\Ingenico\ST_DATABASE_LINE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_DATABASE_RESULT.cs" />
+    <Compile Include="Integrations\Ingenico\ST_DATE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_DATE_TIME.cs" />
+    <Compile Include="Integrations\Ingenico\ST_DEPARTMENT.cs" />
+    <Compile Include="Integrations\Ingenico\ST_Diger.cs" />
+    <Compile Include="Integrations\Ingenico\ST_DM_REPORT.cs" />
+    <Compile Include="Integrations\Ingenico\ST_ECHO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_EcrSettings.cs" />
+    <Compile Include="Integrations\Ingenico\ST_EKU_APPINF.cs" />
+    <Compile Include="Integrations\Ingenico\ST_EKU_HEADER.cs" />
+    <Compile Include="Integrations\Ingenico\ST_EKU_MODULE_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_EXCHANGE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_EXCHANGE_PROFILE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_FILE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_FUNCTION_PARAMETERS.cs" />
+    <Compile Include="Integrations\Ingenico\ST_FUNCTION_PARAMETERS_PASSWORD.cs" />
+    <Compile Include="Integrations\Ingenico\ST_FUNCTION_PARAMETERS_POINT.cs" />
+    <Compile Include="Integrations\Ingenico\ST_GLOBAL_XML_DATA.cs" />
+    <Compile Include="Integrations\Ingenico\ST_GMP_PAIR.cs" />
+    <Compile Include="Integrations\Ingenico\ST_GMP_PAIR_RESP.cs" />
+    <Compile Include="Integrations\Ingenico\ST_HANDLE_LIST.cs" />
+    <Compile Include="Integrations\Ingenico\ST_INI_PARAM.cs" />
+    <Compile Include="Integrations\Ingenico\ST_INTERFACE_XML_DATA.cs" />
+    <Compile Include="Integrations\Ingenico\ST_INVIOCE_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_ITEM.cs" />
+    <Compile Include="Integrations\Ingenico\ST_KDV_Grubu.cs" />
+    <Compile Include="Integrations\Ingenico\ST_LOYALTY_SERVICE_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_LOYALTY_SERVICE_REQ.cs" />
+    <Compile Include="Integrations\Ingenico\ST_MODULE_USAGE_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_MULTIPLE_BANK_RESPONSE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_MULTIPLE_RETURN_CODE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_OdemeToplami.cs" />
+    <Compile Include="Integrations\Ingenico\ST_OKC_Belge.cs" />
+    <Compile Include="Integrations\Ingenico\ST_OKC_BelgeTipi.cs" />
+    <Compile Include="Integrations\Ingenico\ST_ONLINE_INVIOCE_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PAYMENT.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PaymentErrMessage.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PAYMENT_APPLICATION_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PAYMENT_CHECK_RESPONSE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PAYMENT_REQUEST.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PAYMENT_RESPONSE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PLU_GROUP_RECORD.cs" />
+    <Compile Include="Integrations\Ingenico\ST_PLU_RECORD.cs" />
+    <Compile Include="Integrations\Ingenico\ST_printerDataForOneLine.cs" />
+    <Compile Include="Integrations\Ingenico\ST_SALEINFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_TAXFREE_INFO.cs" />
+    <Compile Include="Integrations\Ingenico\ST_TAX_RATE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_TICKET.cs" />
+    <Compile Include="Integrations\Ingenico\ST_TICKET_HEADER.cs" />
+    <Compile Include="Integrations\Ingenico\ST_TIME.cs" />
+    <Compile Include="Integrations\Ingenico\ST_TRANS_INQUIRY.cs" />
+    <Compile Include="Integrations\Ingenico\ST_UNIQUE_ID.cs" />
+    <Compile Include="Integrations\Ingenico\ST_USER_MESSAGE.cs" />
+    <Compile Include="Integrations\Ingenico\ST_VATDetail.cs" />
+    <Compile Include="Integrations\Ingenico\ST_Z_REPORT.cs" />
+    <Compile Include="Integrations\Ingenico\TransactionHandle.cs" />
+    <Compile Include="Integrations\Ingenico\TTicketType.cs" />
+    <Compile Include="Integrations\Ingenico\Z_cashier.cs" />
+    <Compile Include="Integrations\Ingenico\Z_cinema.cs" />
+    <Compile Include="Integrations\Ingenico\Z_countOf.cs" />
+    <Compile Include="Integrations\Ingenico\Z_department.cs" />
+    <Compile Include="Integrations\Ingenico\Z_exchange.cs" />
+    <Compile Include="Integrations\Ingenico\Z_invoice.cs" />
+    <Compile Include="Integrations\Ingenico\Z_invoiceSale.cs" />
+    <Compile Include="Integrations\Ingenico\Z_other.cs" />
+    <Compile Include="Integrations\Ingenico\Z_payment.cs" />
+    <Compile Include="Integrations\Ingenico\Z_refund.cs" />
+    <Compile Include="Integrations\Ingenico\Z_sale.cs" />
+    <Compile Include="Integrations\Ingenico\Z_sectorData.cs" />
+    <Compile Include="Integrations\Ingenico\Z_tax.cs" />
+    <Compile Include="Integrations\Ingenico\_ST_PAYMENT_REQUEST_ORGINAL_DATA.cs" />
+    <Compile Include="PayGo\GetDevice.cs" />
+    <Compile Include="PayGo\OnDeviceChange.cs" />
+    <Compile Include="PayGo\PCPOSOKC_DLL.cs" />
+    <Compile Include="PayGo\SerialNotify.cs" />
+    <Compile Include="PayGo\Utils.cs" />
     <Compile Include="Integrations\Inpos\InposIntegrationMethods.cs" />
     <Compile Include="Integrations\Ticari1\FaturaXmlModal.cs" />
     <Compile Include="Integrations\Ticari1\Modals.cs" />
@@ -629,6 +892,9 @@
       <CachedSettingsPropName>ArtiConnect_com_ticari1_ews_Ticari1_eInvoice_Con_Web_Services</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="bin\Debug\PAYGO_PCPOSOKC.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -638,7 +904,9 @@
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
     <Error Condition="!Exists('packages\squirrel.windows.2.0.1\build\squirrel.windows.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\squirrel.windows.2.0.1\build\squirrel.windows.props'))" />
+    <Error Condition="!Exists('packages\Serilog.4.3.0\build\Serilog.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Serilog.4.3.0\build\Serilog.targets'))" />
   </Target>
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="packages\Serilog.4.3.0\build\Serilog.targets" Condition="Exists('packages\Serilog.4.3.0\build\Serilog.targets')" />
 </Project>

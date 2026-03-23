@@ -230,74 +230,106 @@ namespace ArtiConnect.Api.Controllers
             }
         }
 
-        /// <summary>
-        /// Prints a label using the specified template and data
-        /// </summary>
-        /// <param name="request">Print label request containing all necessary information</param>
-        /// <returns>HTTP action result</returns>
         [HttpPost]
         [Route("printLabel")]
         public IHttpActionResult PrintLabel(PrintLabelRequestModal request)
         {
-            if (request == null)
-            {
-                return BadRequest("Print request cannot be null");
-            }
+            if (request == null) return BadRequest("Request cannot be null");
+
+            // LabelData null gelirse (hiç ekstra veri yoksa) patlamasın diye önlem
+            if (request.LabelData == null) request.LabelData = new Dictionary<string, object>();
 
             try
             {
                 var reportPath = Path.Combine(REPORTS_DIRECTORY, request.FileName);
-
                 if (!File.Exists(reportPath))
                 {
                     return BadRequest($"Report template not found: {request.FileName}");
                 }
 
-                var report = new Etiket();
-                report.LoadLayout(reportPath);
-                report.DisplayName = $"Report Designer - {request.FileName}";
-
-                // Set report data
-                report.lbBarkod.Text = request.Barcode;
-                report.lbUrunAdi.Text = request.ProductName;
-                report.lbFiyat.Text = request.Price.ToString("n2");
-
-                // Configure report settings
-                report.CreateDocument();
-                report.PrintingSystem.ShowMarginsWarning = false;
-                report.PrintingSystem.ShowPrintStatusDialog = false;
-                report.RequestParameters = false;
-
-                // Configure print tool
-                var printTool = new ReportPrintTool(report);
-                printTool.AutoShowParametersPanel = false;
-                printTool.PrintingSystem.ShowMarginsWarning = false;
-                printTool.PrintingSystem.ShowPrintStatusDialog = false;
-
-                // Set number of copies
-                printTool.PrintingSystem.StartPrint += (sender, e) =>
+                using (var report = new XtraReport())
                 {
-                    e.PrintDocument.PrinterSettings.Copies = (short)request.CopyNumber;
-                };
+                    report.LoadLayout(reportPath);
+                    report.DisplayName = $"Report - {request.FileName}";
 
-                // Print to the specified printer
-                if (!string.IsNullOrEmpty(request.PrinterName))
-                {
-                    printTool.PrintingSystem.PageSettings.PrinterName = request.PrinterName;
-                    printTool.Print(request.PrinterName);
-                }
-                else
-                {
-                    // Print to default printer if no printer specified
-                    printTool.Print();
+                    // Dinamik veri eşleştirme: request.LabelData gönderiyoruz
+                    UpdateReportComponentsDynamically(report, request.LabelData);
+
+                    report.CreateDocument();
+                    report.PrintingSystem.ShowMarginsWarning = false;
+                    report.PrintingSystem.ShowPrintStatusDialog = false;
+
+                    using (var printTool = new ReportPrintTool(report))
+                    {
+                        printTool.AutoShowParametersPanel = false;
+
+                        printTool.PrintingSystem.StartPrint += (sender, e) =>
+                        {
+                            e.PrintDocument.PrinterSettings.Copies = (short)request.CopyNumber;
+                        };
+
+                        if (!string.IsNullOrEmpty(request.PrinterName))
+                        {
+                            printTool.PrintingSystem.PageSettings.PrinterName = request.PrinterName;
+                            printTool.Print(request.PrinterName);
+                        }
+                        else
+                        {
+                            printTool.Print();
+                        }
+                    }
                 }
 
                 return Ok(new { Success = true, Message = "Label printed successfully" });
             }
             catch (Exception ex)
             {
-                return BadRequest($"Error during printing: {ex.Message}");
+                return BadRequest($"Error: {ex.Message}");
             }
+        }
+
+        /// <summary>
+        /// Rapor bileşenlerini dinamik sözlük verisiyle günceller.
+        /// Hem Tag hem de Text özelliğini kontrol eder.
+        /// </summary>
+        private void UpdateReportComponentsDynamically(XtraReport report, Dictionary<string, object> data)
+        { 
+            var allControls = report.AllControls<XRControl>();
+
+            foreach (XRControl control in allControls)
+            {
+                bool dataFound = false;
+                 
+                if (control.Tag != null)
+                {
+                    string tagKey = control.Tag.ToString();
+                    if (data.ContainsKey(tagKey))
+                    {
+                        control.Text = FormatValue(data[tagKey]);
+                        dataFound = true;
+                    }
+                }
+                 
+                if (!dataFound && !string.IsNullOrEmpty(control.Text))
+                { 
+                    foreach (var item in data)
+                    { 
+                        if (control.Text.Contains(item.Key))
+                        {
+                            control.Text = FormatValue(item.Value);
+                             
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+         
+        private string FormatValue(object value)
+        {
+            if (value == null) return string.Empty;
+             
+            return value.ToString();
         }
     }
 }

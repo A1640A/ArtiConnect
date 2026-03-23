@@ -208,7 +208,7 @@ namespace ArtiConnect.Api.Controllers
         /// </summary>
         [HttpPost]
         [Route("addSaleItem")]
-        public IHttpActionResult AddSaleItem(AddSaleItemRequest request)
+        public IHttpActionResult AddSaleItem(ArtiConnect.Api.Modals.Inpos.AddSaleItemRequest request)
         {
             try
             {

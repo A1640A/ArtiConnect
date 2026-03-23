@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAna));
             this.lblPort = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
@@ -51,10 +52,12 @@
             this.dgvApiLogs = new System.Windows.Forms.DataGridView();
             this.btnClear = new System.Windows.Forms.Button();
             this.txtSearchLogs = new System.Windows.Forms.TextBox();
+            this.membersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApiLogs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.membersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lblPort
@@ -263,6 +266,10 @@
             this.txtSearchLogs.TabIndex = 10;
             this.txtSearchLogs.TextChanged += new System.EventHandler(this.txtSearchLogs_TextChanged);
             // 
+            // membersBindingSource
+            // 
+            this.membersBindingSource.DataSource = typeof(ArtiConnect.Hugin.Members);
+            // 
             // frmAna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,6 +300,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvApiLogs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.membersBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,6 +330,7 @@
         private System.Windows.Forms.DataGridView dgvApiLogs;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.TextBox txtSearchLogs;
+        private System.Windows.Forms.BindingSource membersBindingSource;
     }
 }
 

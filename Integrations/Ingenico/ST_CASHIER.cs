@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ArtiConnect.Integrations.Ingenico
+{
+    public class ST_CASHIER
+    {
+        public ushort index;
+
+        public uint flags;
+
+        public string name;
+
+        public ST_CASHIER()
+        {
+            name = "";
+        }
+    }
+
+}

@@ -5,8 +5,10 @@ using Owin;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,9 +19,73 @@ namespace ArtiConnect.Api
 {
     public class Startup
     {
+        // DLL yükleme için P/Invoke fonksiyonları
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern IntPtr LoadLibrary(string libname);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
+        private static extern bool FreeLibrary(IntPtr hModule);
+
+        // DLL yükleme durumunu izlemek için statik değişken
+        public static bool IsDllLoaded { get; private set; } = true;
+        public static string DllLoadError { get; private set; } = null;
+
         public void Configuration(IAppBuilder app)
         {
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll); 
+            // DLL'i yükleme işlemi
+            //try
+            //{
+            //    // Olası DLL yollarını kontrol et
+            //    string[] potentialPaths = new string[]
+            //    {
+            //        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "PAYGO_PCPOSOKC.dll"),
+            //        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "PAYGO_PCPOSOKC.dll"),
+            //        Path.Combine(Environment.CurrentDirectory, "PAYGO_PCPOSOKC.dll"),
+            //        // Ek yollar eklenebilir
+            //    };
+
+            //    string dllPath = null;
+            //    foreach (string path in potentialPaths)
+            //    {
+            //        System.Diagnostics.Debug.WriteLine($"DLL aranıyor: {path}");
+            //        if (File.Exists(path))
+            //        {
+            //            dllPath = path;
+            //            System.Diagnostics.Debug.WriteLine($"DLL bulundu: {path}");
+            //            break;
+            //        }
+            //    }
+
+            //    if (dllPath == null)
+            //    {
+            //        DllLoadError = "PAYGO_PCPOSOKC.dll hiçbir konumda bulunamadı.";
+            //        System.Diagnostics.Debug.WriteLine(DllLoadError);
+            //    }
+            //    else
+            //    {
+            //        // DLL'i manuel olarak yükle
+            //        IntPtr hLib = LoadLibrary(dllPath);
+            //        if (hLib == IntPtr.Zero)
+            //        {
+            //            int errorCode = Marshal.GetLastWin32Error();
+            //            //DllLoadError = $"DLL yüklenemedi. Hata kodu: {errorCode}";
+            //            System.Diagnostics.Debug.WriteLine(DllLoadError);
+            //            IsDllLoaded = true;
+            //        }
+            //        else
+            //        {
+            //            IsDllLoaded = true;//
+            //            System.Diagnostics.Debug.WriteLine("DLL başarıyla yüklendi.");
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    DllLoadError = $"DLL yükleme hatası: {ex.Message}";
+            //    System.Diagnostics.Debug.WriteLine(DllLoadError);
+            //}
+
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
             // Web API konfigürasyonu
             var config = new HttpConfiguration();
@@ -49,11 +115,12 @@ namespace ArtiConnect.Api
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
 
+            // DLL yükleme durumunu kontrol eden bir mesaj işleyici ekle
+            config.MessageHandlers.Add(new DllCheckHandler());
             config.Filters.Add(new ApiLoggerAttribute());
             config.MessageHandlers.Add(new BufferPolicySelector());
 
-            // API Logger middleware'ini ekle - Web API'den ÖNCE ekleyin
-            //app.Use(typeof(ApiLoggerMiddleware));
+            config.EnsureInitialized();
 
             // OWIN middleware'leri
             app.UseWebApi(config);
@@ -69,6 +136,26 @@ namespace ArtiConnect.Api
             app.UseFileServer(fileServerOptions);
         }
 
+        // DLL yükleme durumunu kontrol eden mesaj işleyici
+        public class DllCheckHandler : DelegatingHandler
+        {
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                // Eğer DLL yüklenemedi ise ve PayGo API'sine bir istek yapılıyorsa hata döndür
+                if (!IsDllLoaded && request.RequestUri.AbsolutePath.Contains("/api/paygo/"))
+                {
+                    var response = new HttpResponseMessage(System.Net.HttpStatusCode.ServiceUnavailable)
+                    {
+                        Content = new StringContent($"{{\"message\": \"{DllLoadError}\"}}", Encoding.UTF8, "application/json")
+                    };
+                    return Task.FromResult(response);
+                }
+
+                return base.SendAsync(request, cancellationToken);
+            }
+        }
+
         public class BufferPolicySelector : DelegatingHandler
         {
             protected override async Task<HttpResponseMessage> SendAsync(
@@ -79,7 +166,6 @@ namespace ArtiConnect.Api
                 {
                     await request.Content.LoadIntoBufferAsync();
                 }
-
                 return await base.SendAsync(request, cancellationToken);
             }
         }

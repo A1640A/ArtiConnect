@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ArtiConnect.Integrations.Ingenico
+{
+    public enum ETransactionFlags
+    {
+        FLG_XTRANS_GMP3 = 2,
+        FLG_XTRANS_FROM_FILE = 4,
+        FLG_XTRANS_TAXFREE_PARAMETERS_SET = 0x100,
+        FLG_XTRANS_TICKETTING_EXISTS = 0x200,
+        FLG_XTRANS_FULL_RCPT_CANCEL = 0x1000,
+        FLG_XTRANS_NONEY_COLLECTION_EXISTS = 0x2000,
+        FLG_XTRANS_TAXLESS_ITEM_EXISTS = 0x4000,
+        FLG_XTRANS_INVOICE_PARAMETERS_SET = 0x8000,
+        FLG_XTRANS_TICKET_HEADER_PRINTED = 0x20000,
+        FLG_XTRANS_TICKET_TOTALS_AND_PAYMENTS_PRINTED = 0x40000,
+        FLG_XTRANS_TICKET_FOOTER_BEFORE_MF_PRINTED = 0x80000,
+        FLG_XTRANS_TICKET_FOOTER_MF_PRINTED = 0x100000,
+        FLG_XTRANS_ONLINE_INVOICE_PARAMETERS_SET = 0x200000
+    }
+
+}
